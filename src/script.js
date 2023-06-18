@@ -1,6 +1,9 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as lilgui from 'lil-gui'
+import typefaceFont from 'three/examples/fonts/helvetiker_regular.typeface.json'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 
 /**
  * Setup the threeJS basics
@@ -9,18 +12,66 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 const gui = new lilgui.GUI()
 
+
 /**
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
+const wordTexture = textureLoader.load('/textures/matcaps/2.png')
+const donutTexture = textureLoader.load('/textures/matcaps/3.png')
+
 
 /**
- * Object
+ * Fonts
  */
-const geometry = new THREE.BoxGeometry( 1, 1, 1 ); 
-const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} ); 
-const cube = new THREE.Mesh( geometry, material ); 
-scene.add( cube );
+const fontLoader = new FontLoader()
+
+fontLoader.load(
+    '/fonts/helvetiker_regular.typeface.json',
+    (font) =>
+    {
+        const textGeometry = new TextGeometry(
+            'PORTFOLIO',
+            {
+                font: font,
+                size: 1,
+                height: 0.2,
+                curveSegments: 12,
+                bevelEnabled: true,
+                bevelThickness: 0.03,
+                bevelSize: 0.04,
+                bevelOffset: 0,
+                bevelSegments: 5
+            }
+        )
+
+        textGeometry.center()
+
+        const textMaterial = new THREE.MeshMatcapMaterial({ matcap: wordTexture })
+        const text = new THREE.Mesh(textGeometry, textMaterial)
+        scene.add(text)
+    }
+)
+
+
+/**
+ * Let's put a bunch of random donuts
+ */
+const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
+const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: donutTexture })
+
+for (let i=0; i<1000; i++) 
+{
+    const donut = new THREE.Mesh(donutGeometry, donutMaterial)
+    scene.add(donut)
+
+    donut.position.x = (Math.random() - 0.5) * 50
+    donut.position.y = (Math.random() - 0.5) * 50
+    donut.position.z = (Math.random() - 0.5) * 50
+
+    const scale = Math.random() * 2
+    donut.scale.set(scale, scale, scale)
+}
 
 
 /**
@@ -55,7 +106,6 @@ window.addEventListener('resize', () =>
 })
 
 
-
 /**
  * Setup the camera and controls
  */
@@ -63,7 +113,7 @@ window.addEventListener('resize', () =>
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 1
 camera.position.y = 1
-camera.position.z = 2
+camera.position.z = 4
 scene.add(camera)
 
 // Use built in ThreeJS Object to handle user interaction
