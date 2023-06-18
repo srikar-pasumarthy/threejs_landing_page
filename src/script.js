@@ -57,6 +57,10 @@ fontLoader.load(
 /**
  * Let's put a bunch of random donuts
  */
+// Create the container for the donuts
+const donutContainer = new THREE.Object3D();
+scene.add(donutContainer);
+
 const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
 const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: donutTexture })
 
@@ -69,8 +73,12 @@ for (let i=0; i<1000; i++)
     donut.position.y = (Math.random() - 0.5) * 50
     donut.position.z = (Math.random() - 0.5) * 50
 
+    donut.rotateX((Math.random() - 0.5) * 3)
+    donut.rotateZ((Math.random() - 0.5) * 3)
+
     const scale = Math.random() * 2
     donut.scale.set(scale, scale, scale)
+    donutContainer.add(donut);
 }
 
 
@@ -128,6 +136,10 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    // Update donut rotation
+    donutContainer.rotation.x += 0.01;
+    donutContainer.rotation.y += 0.01;
 
     // Update controls
     controls.update()
