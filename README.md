@@ -1,2 +1,2 @@
 # Making a landing page using threeJS
-Hey github pages
+https://srikar-pasumarthy.github.io/threejs_landing_page/
