@@ -18,6 +18,7 @@ const gui = new lilgui.GUI()
 const textureLoader = new THREE.TextureLoader()
 const wordTexture = textureLoader.load('/textures/matcaps/2.png')
 const donutTexture = textureLoader.load('/textures/matcaps/3.png')
+const planeTexture = textureLoader.load('textures/background/white_dot.png')
 
 const donutContainer = new THREE.Object3D();
 scene.add(donutContainer);
@@ -153,7 +154,11 @@ controls.enableZoom = false
 /**
  * Trying to get some stationary dots so I don't throw up
  */
-// TODO:
+const planeGeometry = new THREE.PlaneGeometry(1000, 1000)
+const planeMesh = new THREE.MeshBasicMaterial({ map: planeTexture })
+const plane = new THREE.Mesh(planeGeometry, planeMesh)
+scene.add(plane)
+plane.translateZ(-100)
 
 
 /**
