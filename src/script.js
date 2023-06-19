@@ -9,7 +9,6 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
  */
 const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
-const gui = new lilgui.GUI()
 
 
 /**
@@ -150,15 +149,6 @@ controls.enableDamping = true
 controls.enablePan = false
 controls.enableZoom = false
 controls.enableZoom = false
-
-/**
- * Trying to get some stationary dots so I don't throw up
- */
-const planeGeometry = new THREE.PlaneGeometry(1000, 1000)
-const planeMesh = new THREE.MeshBasicMaterial({ map: planeTexture })
-const plane = new THREE.Mesh(planeGeometry, planeMesh)
-scene.add(plane)
-plane.translateZ(-100)
 
 
 /**
