@@ -64,14 +64,14 @@ fontLoader.load(
 const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45)
 const donutMaterial = new THREE.MeshMatcapMaterial({ matcap: donutTexture })
 
-for (let i=0; i<500; i++) 
+for (let i=0; i<1000; i++) 
 {
     const donut = new THREE.Mesh(donutGeometry, donutMaterial)
     scene.add(donut)
 
-    donut.position.x = (Math.random() - 0.5) * 50
-    donut.position.y = (Math.random() - 0.5) * 50
-    donut.position.z = (Math.random() - 0.5) * 50
+    donut.position.x = (Math.random() - 0.5) * 100
+    donut.position.y = (Math.random() - 0.5) * 100
+    donut.position.z = (Math.random() - 0.5) * 100
 
     donut.rotateX((Math.random() - 0.5) * 3)
     donut.rotateZ((Math.random() - 0.5) * 3)
@@ -83,14 +83,14 @@ for (let i=0; i<500; i++)
 
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)
 
-for (let i=0; i<90; i++) 
+for (let i=0; i<200; i++) 
 {
     const cube = new THREE.Mesh(cubeGeometry, donutMaterial)
     scene.add(cube)
 
-    cube.position.x = (Math.random() - 0.5) * 50
-    cube.position.y = (Math.random() - 0.5) * 50
-    cube.position.z = (Math.random() - 0.5) * 50
+    cube.position.x = (Math.random() - 0.5) * 100
+    cube.position.y = (Math.random() - 0.5) * 100
+    cube.position.z = (Math.random() - 0.5) * 100
 
     cube.rotateX((Math.random() - 0.5) * 3)
     cube.rotateZ((Math.random() - 0.5) * 3)
@@ -148,7 +148,7 @@ const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 controls.enablePan = false
 controls.enableZoom = false
-controls.enableZoom = false
+controls.enableRotate = false
 
 
 /**
