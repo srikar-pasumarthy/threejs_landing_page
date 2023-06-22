@@ -15,9 +15,9 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const wordTexture = textureLoader.load('/textures/matcaps/1.png')
-const donutTexture = textureLoader.load('/textures/matcaps/2.png')
-const planeTexture = textureLoader.load('textures/background/white_dot.png')
+const wordTexture = textureLoader.load('/textures/1.png')
+const donutTexture = textureLoader.load('/textures/2.png')
+const planeTexture = textureLoader.load('textures/white_dot.png')
 
 const donutContainer = new THREE.Object3D();
 scene.add(donutContainer);
